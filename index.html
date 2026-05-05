@@ -25,6 +25,7 @@
     /* HEADER */
     .vs-header { background: var(--cream) !important; border-bottom: 1px solid var(--sand) !important; }
     .vs-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--charcoal) !important; text-decoration: none; }
+
     .vs-logo span { color: var(--terracotta); }
     .vs-nav-link { font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal) !important; text-decoration: none; padding: 0 14px; opacity: 0.75; transition: opacity 0.2s; cursor: pointer; }
     .vs-nav-link:hover { opacity: 1; }
@@ -83,6 +84,8 @@
     /* FOOTER */
     .vs-footer { background-color: var(--charcoal); border-top: 1px solid rgba(255,255,255,0.06); padding: 32px 0; }
     .vs-footer-text { font-size: 0.78rem; color: rgba(250,248,244,0.35); letter-spacing: 0.05em; }
+    .vs-footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--terracotta) !important; text-decoration: none; }
+
 
     /* DRAWER */
     .vs-drawer-link { font-family: 'Jost', sans-serif; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal) !important; padding: 14px 24px !important; }
@@ -149,7 +152,42 @@
     }
     .vs-time-slot:hover { border-color: var(--terracotta); color: var(--terracotta); }
     .vs-time-slot.selected { background: var(--charcoal); color: var(--cream); border-color: var(--charcoal); }
+    /* LOADER */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      transition: opacity 0.4s ease, visibility 0.4s;
+    }
 
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      letter-spacing: 0.05em;
+      animation: luxuryReveal 1.2s ease;
+    }
+
+    @keyframes luxuryReveal {
+      0% {
+        opacity: 0;
+        transform: scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }         
     @media (max-width: 600px) {
       .vs-modal { padding: 32px 24px; }
       .vs-form-row { grid-template-columns: 1fr; }
@@ -158,6 +196,12 @@
   </style>
 </head>
 <body>
+  <!-- LOADING SCREEN -->
+<div id="loader">
+  <div class="loader-inner">
+    <h1 class="loader-logo">Verdana<span>.</span></h1>
+  </div>
+</div>
 <div id="app">
   <v-app style="background: var(--cream);">
 
@@ -315,7 +359,9 @@
         <v-container style="max-width:1200px;">
           <v-row align="center">
             <v-col cols="12" md="4">
-              <span class="vs-logo" style="font-size:1.1rem;color:var(--terracotta);">Verdana<span style="color:var(--terracotta);">.</span></span>
+              <span class="vs-footer-logo" style="font-size:1.1rem;">
+                Verdana<span style="color:var(--terracotta);">.</span>
+              </span>          
             </v-col>
             <v-col cols="12" md="4" class="text-md-center">
               <span class="vs-footer-text">Lagos · London · Dubai</span>
@@ -613,6 +659,12 @@ new Vue({
     },
   },
 });
+
+window.addEventListener("load", function () {
+    setTimeout(() => {
+      document.getElementById("loader").classList.add("hidden");
+    }, 1000); // adjust timing (1000 = 1s)
+  });
 </script>
 </body>
 </html>

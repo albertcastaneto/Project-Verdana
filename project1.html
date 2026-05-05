@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verdana Studio — Interior Design</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@2.7.2/dist/vuetify.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2721/2721293.png">
+
+  <style>
+    :root {
+      --cream: #FAF8F4;
+      --sand: #EDE8DF;
+      --terracotta: #C27B50;
+      --terracotta-dark: #A4623A;
+      --charcoal: #2C2C2C;
+      --muted: #7A7670;
+    }
+
+    html, body { background-color: var(--cream) !important; font-family: 'Jost', sans-serif; color: var(--charcoal); }
+
+    /* HEADER */
+    .vs-header { background: var(--cream) !important; border-bottom: 1px solid var(--sand) !important; }
+    .vs-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em; color: var(--charcoal) !important; text-decoration: none; }
+    .vs-logo span { color: var(--terracotta); }
+    .vs-nav-link { font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal) !important; text-decoration: none; padding: 0 14px; opacity: 0.75; transition: opacity 0.2s; cursor: pointer; }
+    .vs-nav-link:hover { opacity: 1; }
+    .vs-nav-link.active { opacity: 1; color: var(--terracotta) !important; }
+
+    /* HERO */
+    .vs-hero { background-color: var(--cream); padding: 100px 0 80px; border-bottom: 1px solid var(--sand); }
+    .vs-hero-eyebrow { font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 20px; }
+    .vs-hero-headline { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 300; line-height: 1.05; color: var(--charcoal); margin-bottom: 28px; }
+    .vs-hero-headline em { font-style: italic; color: var(--terracotta); }
+    .vs-hero-sub { font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 300; color: var(--muted); line-height: 1.75; max-width: 480px; margin-bottom: 40px; }
+    .vs-btn-primary { background-color: var(--charcoal) !important; color: var(--cream) !important; font-family: 'Jost', sans-serif !important; font-size: 0.75rem !important; letter-spacing: 0.16em !important; text-transform: uppercase !important; border-radius: 0 !important; padding: 14px 36px !important; height: auto !important; box-shadow: none !important; transition: background-color 0.2s !important; }
+    .vs-btn-primary:hover { background-color: var(--terracotta) !important; }
+    .vs-btn-outline { border: 1px solid var(--charcoal) !important; color: var(--charcoal) !important; font-family: 'Jost', sans-serif !important; font-size: 0.75rem !important; letter-spacing: 0.16em !important; text-transform: uppercase !important; border-radius: 0 !important; padding: 14px 36px !important; height: auto !important; box-shadow: none !important; background: transparent !important; transition: background-color 0.2s !important; }
+    .vs-btn-outline:hover { background-color: var(--sand) !important; }
+    .vs-hero-image-block { aspect-ratio: 4/5; display: flex; align-items: flex-end; justify-content: flex-start; padding: 24px; position: relative; overflow: hidden; }
+    .vs-hero-image-block img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .vs-hero-image-block::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 50%); }
+    .vs-hero-image-caption { position: relative; z-index: 1; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
+
+    /* SECTIONS */
+    .vs-section { padding: 90px 0; }
+    .vs-section-alt { background-color: var(--sand); }
+    .vs-section-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 12px; }
+    .vs-section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.15; color: var(--charcoal); margin-bottom: 20px; }
+    .vs-section-body { font-size: 0.95rem; font-weight: 300; color: var(--muted); line-height: 1.8; }
+    .vs-divider-line { width: 48px; height: 1px; background: var(--terracotta); margin: 20px 0; }
+
+    /* SERVICE CARDS */
+    .vs-service-card { border: 1px solid var(--sand); padding: 40px 32px; background: var(--cream); height: 100%; }
+    .vs-service-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--sand); line-height: 1; margin-bottom: 16px; }
+    .vs-service-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--charcoal); margin-bottom: 12px; }
+    .vs-service-body { font-size: 0.88rem; font-weight: 300; color: var(--muted); line-height: 1.75; }
+
+    /* PROJECT CARDS */
+    .vs-project-card { background: var(--sand); overflow: hidden; cursor: pointer; }
+    .vs-project-image { aspect-ratio: 4/3; position: relative; overflow: hidden; }
+    .vs-project-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .vs-project-card:hover .vs-project-image img { transform: scale(1.04); }
+    .vs-project-info { padding: 24px; }
+    .vs-project-tag { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 6px; }
+    .vs-project-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--charcoal); }
+
+    /* STATS */
+    .vs-stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 300; color: var(--charcoal); line-height: 1; }
+    .vs-stat-label { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+    .vs-stat-divider { width: 1px; background: var(--sand); min-height: 60px; margin: auto; }
+
+    /* CTA */
+    .vs-cta { background-color: var(--charcoal); padding: 80px 0; }
+    .vs-cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; color: var(--cream); line-height: 1.2; }
+    .vs-cta-sub { font-size: 0.9rem; font-weight: 300; color: rgba(250,248,244,0.55); margin-top: 12px; }
+    .vs-btn-cta { border: 1px solid var(--terracotta) !important; color: var(--terracotta) !important; font-family: 'Jost', sans-serif !important; font-size: 0.75rem !important; letter-spacing: 0.16em !important; text-transform: uppercase !important; border-radius: 0 !important; padding: 14px 36px !important; height: auto !important; box-shadow: none !important; background: transparent !important; transition: background-color 0.2s, color 0.2s !important; }
+    .vs-btn-cta:hover { background-color: var(--terracotta) !important; color: var(--cream) !important; }
+
+    /* FOOTER */
+    .vs-footer { background-color: var(--charcoal); border-top: 1px solid rgba(255,255,255,0.06); padding: 32px 0; }
+    .vs-footer-text { font-size: 0.78rem; color: rgba(250,248,244,0.35); letter-spacing: 0.05em; }
+
+    /* DRAWER */
+    .vs-drawer-link { font-family: 'Jost', sans-serif; font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--charcoal) !important; padding: 14px 24px !important; }
+
+    /* MODAL OVERLAY */
+    .vs-modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 9999;
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .vs-modal {
+      background: var(--cream); max-width: 560px; width: 100%;
+      padding: 48px 44px; position: relative; max-height: 90vh; overflow-y: auto;
+    }
+    .vs-modal-close {
+      position: absolute; top: 16px; right: 16px; background: none; border: none;
+      cursor: pointer; color: var(--muted); font-size: 1.4rem; line-height: 1;
+      font-family: 'Material Icons'; padding: 4px;
+    }
+    .vs-modal-close:hover { color: var(--charcoal); }
+    .vs-modal-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 10px; }
+    .vs-modal-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--charcoal); margin-bottom: 28px; line-height: 1.2; }
+
+    /* FORM */
+    .vs-form-group { margin-bottom: 20px; }
+    .vs-form-group label { display: block; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .vs-form-group input,
+    .vs-form-group textarea,
+    .vs-form-group select {
+      width: 100%; padding: 12px 14px; border: 1px solid var(--sand); background: #fff;
+      font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--charcoal);
+      outline: none; transition: border-color 0.2s; box-sizing: border-box;
+    }
+    .vs-form-group input:focus,
+    .vs-form-group textarea:focus,
+    .vs-form-group select:focus { border-color: var(--terracotta); }
+    .vs-form-group textarea { resize: vertical; min-height: 120px; }
+    .vs-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .vs-form-submit {
+      background: var(--charcoal); color: var(--cream); border: none; cursor: pointer;
+      font-family: 'Jost', sans-serif; font-size: 0.75rem; letter-spacing: 0.16em;
+      text-transform: uppercase; padding: 14px 36px; width: 100%; transition: background-color 0.2s;
+    }
+    .vs-form-submit:hover { background: var(--terracotta); }
+    .vs-form-success { text-align: center; padding: 20px 0; }
+    .vs-form-success-icon { font-size: 2.5rem; color: var(--terracotta); margin-bottom: 16px; font-family: 'Material Icons'; }
+    .vs-form-success h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: var(--charcoal); margin-bottom: 8px; }
+    .vs-form-success p { font-size: 0.9rem; color: var(--muted); }
+
+    /* PROJECT DETAIL MODAL */
+    .vs-project-modal-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; margin-bottom: 24px; }
+    .vs-project-detail-tag { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 8px; }
+    .vs-project-detail-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--charcoal); margin-bottom: 16px; }
+    .vs-project-detail-body { font-size: 0.9rem; font-weight: 300; color: var(--muted); line-height: 1.8; margin-bottom: 24px; }
+    .vs-project-detail-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-top: 1px solid var(--sand); padding-top: 20px; }
+    .vs-project-meta-item label { display: block; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .vs-project-meta-item span { font-size: 0.88rem; color: var(--charcoal); }
+
+    /* BOOK A CALL MODAL */
+    .vs-time-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+    .vs-time-slot {
+      border: 1px solid var(--sand); padding: 10px 8px; text-align: center;
+      font-size: 0.8rem; cursor: pointer; transition: all 0.15s; color: var(--charcoal);
+      background: #fff;
+    }
+    .vs-time-slot:hover { border-color: var(--terracotta); color: var(--terracotta); }
+    .vs-time-slot.selected { background: var(--charcoal); color: var(--cream); border-color: var(--charcoal); }
+
+    @media (max-width: 600px) {
+      .vs-modal { padding: 32px 24px; }
+      .vs-form-row { grid-template-columns: 1fr; }
+      .vs-time-slots { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <v-app style="background: var(--cream);">
+
+    <!-- HEADER -->
+    <v-app-bar app flat class="vs-header" height="68">
+      <v-container class="d-flex align-center pa-0" style="max-width:1200px;">
+        <a href="#" class="vs-logo">Verdana<span>.</span></a>
+        <v-spacer></v-spacer>
+        <nav class="d-none d-md-flex align-center">
+          <a v-for="item in navItems" :key="item.label"
+             @click.prevent="scrollTo(item.href)"
+             class="vs-nav-link" :class="{ active: item.active }">
+            {{ item.label }}
+          </a>
+          <v-btn depressed small class="vs-btn-primary ml-6"
+                 @click="openBooking"
+                 style="font-size:0.68rem !important; padding:10px 22px !important;">
+            Book a Call
+          </v-btn>
+        </nav>
+        <v-btn icon class="d-flex d-md-none" @click="drawer = true">
+          <v-icon color="var(--charcoal)">menu</v-icon>
+        </v-btn>
+      </v-container>
+    </v-app-bar>
+
+    <!-- Mobile Drawer -->
+    <v-navigation-drawer v-model="drawer" app right temporary style="background: var(--cream);">
+      <v-list dense>
+        <v-list-item v-for="item in navItems" :key="item.label" @click="scrollTo(item.href); drawer = false;">
+          <v-list-item-title class="vs-drawer-link">{{ item.label }}</v-list-item-title>
+        </v-list-item>
+        <v-list-item @click="openBooking; drawer = false;">
+          <v-list-item-title class="vs-drawer-link" style="color: var(--terracotta) !important;">Book a Call</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-main style="background: var(--cream); padding-top: 68px;">
+
+      <!-- HERO -->
+      <section class="vs-hero" id="home">
+        <v-container style="max-width:1200px;">
+          <v-row align="center">
+            <v-col cols="12" md="6" class="pr-md-10">
+              <p class="vs-hero-eyebrow">Interior Design Studio</p>
+              <h1 class="vs-hero-headline">Spaces that<br><em>feel like you.</em></h1>
+              <p class="vs-hero-sub">We craft interiors with intention — where each material, proportion, and detail serves both beauty and life.</p>
+              <div class="d-flex flex-wrap" style="gap: 14px;">
+                <v-btn depressed class="vs-btn-primary" @click="scrollTo('#work')">View Our Work</v-btn>
+                <v-btn depressed class="vs-btn-outline" @click="scrollTo('#services')">Our Services</v-btn>
+              </div>
+            </v-col>
+            <v-col cols="12" md="6" class="mt-8 mt-md-0">
+              <div class="vs-hero-image-block">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&auto=format&fit=crop&q=80" alt="Lagos Penthouse interior" loading="lazy"/>
+                <span class="vs-hero-image-caption">Lagos Penthouse — 2024</span>
+              </div>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
+      <!-- SERVICES -->
+      <section class="vs-section" id="services">
+        <v-container style="max-width:1200px;">
+          <v-row>
+            <v-col cols="12" md="4" class="mb-8">
+              <p class="vs-section-label">What We Do</p>
+              <h2 class="vs-section-title">Our<br>Services</h2>
+              <div class="vs-divider-line"></div>
+              <p class="vs-section-body">From first sketch to final styling, we offer a full suite of design services tailored to residential and boutique commercial spaces.</p>
+            </v-col>
+            <v-col cols="12" md="8">
+              <v-row>
+                <v-col cols="12" sm="4" v-for="svc in services" :key="svc.num">
+                  <div class="vs-service-card" style="cursor:pointer;" @click="openServiceDetail(svc)">
+                    <div class="vs-service-num">{{ svc.num }}</div>
+                    <div class="vs-service-title">{{ svc.title }}</div>
+                    <p class="vs-service-body">{{ svc.body }}</p>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
+      <!-- FEATURED WORK -->
+      <section class="vs-section vs-section-alt" id="work">
+        <v-container style="max-width:1200px;">
+          <v-row class="mb-10">
+            <v-col cols="12" md="6">
+              <p class="vs-section-label">Selected Projects</p>
+              <h2 class="vs-section-title">Featured Work</h2>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12" sm="4" v-for="proj in projects" :key="proj.name">
+              <div class="vs-project-card" @click="openProject(proj)">
+                <div class="vs-project-image">
+                  <img :src="proj.img" :alt="proj.name" loading="lazy"/>
+                </div>
+                <div class="vs-project-info">
+                  <p class="vs-project-tag">{{ proj.tag }}</p>
+                  <p class="vs-project-name">{{ proj.name }}</p>
+                </div>
+              </div>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
+      <!-- ABOUT / STATS -->
+      <section class="vs-section" id="about">
+        <v-container style="max-width:1200px;">
+          <v-row align="center">
+            <v-col cols="12" md="5" class="pr-md-12">
+              <p class="vs-section-label">About the Studio</p>
+              <h2 class="vs-section-title">Design with<br>quiet confidence.</h2>
+              <div class="vs-divider-line"></div>
+              <p class="vs-section-body">Founded in 2011, Verdana Studio is a Lagos-based interior design practice working across Africa, Europe, and the Middle East. We believe good design doesn't shout — it settles, invites, and endures.</p>
+              <p class="vs-section-body mt-4">Our team of eight designers combines rigorous spatial thinking with a deep respect for local craft and material culture.</p>
+            </v-col>
+            <v-col cols="12" md="7" class="mt-8 mt-md-0">
+              <v-row align="center" justify="center">
+                <v-col cols="4" class="text-center" v-for="(stat, i) in stats" :key="stat.num">
+                  <div class="vs-stat-num">{{ stat.num }}</div>
+                  <div class="vs-stat-label">{{ stat.label }}</div>
+                  <v-divider v-if="i < stats.length - 1" class="vs-stat-divider d-none d-sm-block" vertical></v-divider>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
+      <!-- CTA -->
+      <section class="vs-cta" id="contact">
+        <v-container style="max-width:1200px;">
+          <v-row align="center">
+            <v-col cols="12" md="7">
+              <h2 class="vs-cta-title">Ready to reimagine<br>your space?</h2>
+              <p class="vs-cta-sub">Let's start with a conversation.</p>
+            </v-col>
+            <v-col cols="12" md="5" class="d-flex justify-md-end mt-6 mt-md-0">
+              <v-btn depressed class="vs-btn-cta" @click="openContact">Get in Touch</v-btn>
+            </v-col>
+          </v-row>
+        </v-container>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="vs-footer">
+        <v-container style="max-width:1200px;">
+          <v-row align="center">
+            <v-col cols="12" md="4">
+              <span class="vs-logo" style="font-size:1.1rem;">Verdana<span style="color:var(--terracotta);">.</span></span>
+            </v-col>
+            <v-col cols="12" md="4" class="text-md-center">
+              <span class="vs-footer-text">Lagos · London · Dubai</span>
+            </v-col>
+            <v-col cols="12" md="4" class="text-md-right">
+              <span class="vs-footer-text">© 2024 Verdana Studio. All rights reserved.</span>
+            </v-col>
+          </v-row>
+        </v-container>
+      </footer>
+
+    </v-main>
+
+    <!-- ═══ CONTACT MODAL ═══ -->
+    <div v-if="showContact" class="vs-modal-overlay" @click.self="showContact = false">
+      <div class="vs-modal">
+        <button class="vs-modal-close" @click="showContact = false">close</button>
+
+        <div v-if="!contactSent">
+          <p class="vs-modal-label">Get in Touch</p>
+          <h2 class="vs-modal-title">Let's talk about<br>your space.</h2>
+
+          <div class="vs-form-row">
+            <div class="vs-form-group">
+              <label>First Name</label>
+              <input type="text" v-model="contact.firstName" placeholder="Ada"/>
+            </div>
+            <div class="vs-form-group">
+              <label>Last Name</label>
+              <input type="text" v-model="contact.lastName" placeholder="Okonkwo"/>
+            </div>
+          </div>
+          <div class="vs-form-group">
+            <label>Email Address</label>
+            <input type="email" v-model="contact.email" placeholder="ada@example.com"/>
+          </div>
+          <div class="vs-form-group">
+            <label>Project Type</label>
+            <select v-model="contact.projectType">
+              <option value="">Select a type…</option>
+              <option>Residential</option>
+              <option>Commercial</option>
+              <option>Hospitality</option>
+              <option>Renovation</option>
+              <option>Styling & Staging</option>
+            </select>
+          </div>
+          <div class="vs-form-group">
+            <label>Tell Us About Your Project</label>
+            <textarea v-model="contact.message" placeholder="Describe your space, goals, and timeline…"></textarea>
+          </div>
+          <button class="vs-form-submit" @click="submitContact">Send Message</button>
+        </div>
+
+        <div v-else class="vs-form-success">
+          <div class="vs-form-success-icon">check_circle</div>
+          <h3>Message Sent</h3>
+          <p>Thank you, {{ contact.firstName }}. We'll be in touch within 48 hours.</p>
+          <button class="vs-form-submit" style="width:auto; margin-top:24px;" @click="showContact = false">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ BOOKING MODAL ═══ -->
+    <div v-if="showBooking" class="vs-modal-overlay" @click.self="showBooking = false">
+      <div class="vs-modal">
+        <button class="vs-modal-close" @click="showBooking = false">close</button>
+
+        <div v-if="!bookingSent">
+          <p class="vs-modal-label">Discovery Call</p>
+          <h2 class="vs-modal-title">Book a 30-min<br>call with us.</h2>
+
+          <div class="vs-form-group">
+            <label>Your Name</label>
+            <input type="text" v-model="booking.name" placeholder="Ada Okonkwo"/>
+          </div>
+          <div class="vs-form-group">
+            <label>Email Address</label>
+            <input type="email" v-model="booking.email" placeholder="ada@example.com"/>
+          </div>
+          <div class="vs-form-group">
+            <label>Preferred Date</label>
+            <input type="date" v-model="booking.date" :min="minDate"/>
+          </div>
+          <div class="vs-form-group">
+            <label>Available Time Slots</label>
+            <div class="vs-time-slots">
+              <div v-for="slot in timeSlots" :key="slot"
+                   class="vs-time-slot"
+                   :class="{ selected: booking.time === slot }"
+                   @click="booking.time = slot">
+                {{ slot }}
+              </div>
+            </div>
+          </div>
+          <button class="vs-form-submit" @click="submitBooking">Confirm Booking</button>
+        </div>
+
+        <div v-else class="vs-form-success">
+          <div class="vs-form-success-icon">event_available</div>
+          <h3>Call Booked!</h3>
+          <p>We've confirmed your call on <strong>{{ booking.date }}</strong> at <strong>{{ booking.time }}</strong>. A calendar invite will be sent to {{ booking.email }}.</p>
+          <button class="vs-form-submit" style="width:auto; margin-top:24px;" @click="showBooking = false">Done</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ PROJECT DETAIL MODAL ═══ -->
+    <div v-if="selectedProject" class="vs-modal-overlay" @click.self="selectedProject = null">
+      <div class="vs-modal" style="max-width:640px;">
+        <button class="vs-modal-close" @click="selectedProject = null">close</button>
+        <img :src="selectedProject.img" :alt="selectedProject.name" class="vs-project-modal-img"/>
+        <p class="vs-project-detail-tag">{{ selectedProject.tag }}</p>
+        <h2 class="vs-project-detail-name">{{ selectedProject.name }}</h2>
+        <p class="vs-project-detail-body">{{ selectedProject.description }}</p>
+        <div class="vs-project-detail-meta">
+          <div class="vs-project-meta-item">
+            <label>Year</label>
+            <span>{{ selectedProject.year }}</span>
+          </div>
+          <div class="vs-project-meta-item">
+            <label>Scope</label>
+            <span>{{ selectedProject.scope }}</span>
+          </div>
+          <div class="vs-project-meta-item">
+            <label>Area</label>
+            <span>{{ selectedProject.area }}</span>
+          </div>
+          <div class="vs-project-meta-item">
+            <label>Status</label>
+            <span style="color: var(--terracotta);">{{ selectedProject.status }}</span>
+          </div>
+        </div>
+        <button class="vs-form-submit" style="margin-top: 28px;" @click="selectedProject = null; openContact()">Enquire About a Similar Project</button>
+      </div>
+    </div>
+
+    <!-- ═══ SERVICE DETAIL MODAL ═══ -->
+    <div v-if="selectedService" class="vs-modal-overlay" @click.self="selectedService = null">
+      <div class="vs-modal">
+        <button class="vs-modal-close" @click="selectedService = null">close</button>
+        <p class="vs-modal-label">{{ selectedService.num }} — Our Services</p>
+        <h2 class="vs-modal-title">{{ selectedService.title }}</h2>
+        <p class="vs-section-body" style="margin-bottom: 24px;">{{ selectedService.detail }}</p>
+        <div v-for="item in selectedService.includes" :key="item" style="display:flex; align-items:flex-start; gap:12px; margin-bottom:12px;">
+          <span style="color: var(--terracotta); font-family: 'Material Icons'; font-size:16px; margin-top:2px;">check</span>
+          <span style="font-size:0.9rem; color: var(--charcoal);">{{ item }}</span>
+        </div>
+        <button class="vs-form-submit" style="margin-top:28px;" @click="selectedService = null; openContact()">Request This Service</button>
+      </div>
+    </div>
+
+  </v-app>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.7.2/dist/vuetify.min.js"></script>
+<script>
+new Vue({
+  el: '#app',
+  vuetify: new Vuetify({ theme: { disable: true } }),
+  data: {
+    drawer: false,
+    showContact: false,
+    showBooking: false,
+    contactSent: false,
+    bookingSent: false,
+    selectedProject: null,
+    selectedService: null,
+
+    contact: { firstName: '', lastName: '', email: '', projectType: '', message: '' },
+    booking: { name: '', email: '', date: '', time: '' },
+
+    timeSlots: ['9:00 AM', '10:00 AM', '11:00 AM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'],
+
+    navItems: [
+      { label: 'Home',     href: '#home',     active: true  },
+      { label: 'Work',     href: '#work',     active: false },
+      { label: 'Services', href: '#services', active: false },
+      { label: 'About',    href: '#about',    active: false },
+      { label: 'Contact',  href: '#contact',  active: false },
+    ],
+
+    services: [
+      {
+        num: '01',
+        title: 'Interior Design',
+        body: 'Full-scope residential and commercial design from concept through to installation.',
+        detail: 'Our full interior design service covers every stage of your project — from initial concept and space planning to material selection, procurement, and final installation. We work closely with you to understand how you live, and translate that into spaces that are as functional as they are beautiful.',
+        includes: ['Concept development & mood boards', 'Space planning & layout', 'Material & finish selection', 'FF&E procurement', 'Site supervision & installation management', 'Post-completion walkthrough'],
+      },
+      {
+        num: '02',
+        title: 'Renovation Consulting',
+        body: 'Structural and aesthetic guidance for renovation projects of any scale.',
+        detail: 'We guide homeowners and developers through the complexities of renovation — providing expert design direction, contractor coordination, and quality assurance so your project stays on vision, on time, and on budget.',
+        includes: ['Pre-renovation design brief', 'Contractor selection support', 'Structural change review', 'Material & specification advisory', 'Budget tracking & value engineering', 'Progress monitoring visits'],
+      },
+      {
+        num: '03',
+        title: 'Styling & Staging',
+        body: 'Curated furnishing, art, and accessory selection for finished spaces.',
+        detail: 'The final layer of a beautiful interior is often the most overlooked. Our styling service brings your completed space to life with precisely chosen furniture, art, lighting, and objects — whether for everyday living, photography, or property sale.',
+        includes: ['Furniture sourcing & curation', 'Art & object selection', 'Soft furnishing & textile styling', 'Lighting layering', 'Plant & greenery placement', 'Professional photography coordination'],
+      },
+    ],
+
+    projects: [
+      {
+        name: 'The Ikoyi Residence',
+        tag: 'Residential · Lagos',
+        img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop&q=80',
+        description: 'A 5-bedroom private residence in Lagos\'s Ikoyi neighbourhood, designed for a young family returning from London. The brief called for a home that felt both cosmopolitan and deeply rooted — drawing on Nigerian craft traditions while embracing contemporary spatial openness.',
+        year: '2023',
+        scope: 'Full Interior Design',
+        area: '620 m²',
+        status: 'Completed',
+      },
+      {
+        name: 'Maison Blanc',
+        tag: 'Hospitality · Paris',
+        img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&auto=format&fit=crop&q=80',
+        description: 'A boutique hotel in the 7th arrondissement, Paris — 18 rooms reimagined as calm, light-filled retreats. We stripped back decades of heavy renovation to reveal original Haussmann details, layering them with natural stone, aged brass, and bespoke linen textiles.',
+        year: '2022',
+        scope: 'Hospitality Design',
+        area: '1,100 m²',
+        status: 'Completed',
+      },
+      {
+        name: 'Clifton Heights',
+        tag: 'Residential · Cape Town',
+        img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&auto=format&fit=crop&q=80',
+        description: 'A clifftop villa perched above Clifton Beach, designed to dissolve the boundary between inside and outside. Full-height glass, a palette of bleached oak and warm plaster, and locally sourced artisan pieces make this one of our most celebrated residential projects.',
+        year: '2024',
+        scope: 'Full Interior Design + Landscape',
+        area: '480 m²',
+        status: 'Completed',
+      },
+    ],
+
+    stats: [
+      { num: '13+', label: 'Years of Practice' },
+      { num: '180', label: 'Projects Completed' },
+      { num: '24',  label: 'Design Awards' },
+    ],
+  },
+
+  computed: {
+    minDate() {
+      const d = new Date();
+      d.setDate(d.getDate() + 2);
+      return d.toISOString().split('T')[0];
+    }
+  },
+
+  methods: {
+    scrollTo(hash) {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      this.navItems.forEach(n => n.active = n.href === hash);
+    },
+
+    openContact() {
+      this.contactSent = false;
+      this.showContact = true;
+    },
+
+    openBooking() {
+      this.bookingSent = false;
+      this.showBooking = true;
+    },
+
+    openProject(proj) {
+      this.selectedProject = proj;
+    },
+
+    openServiceDetail(svc) {
+      this.selectedService = svc;
+    },
+
+    submitContact() {
+      if (!this.contact.firstName || !this.contact.email) {
+        alert('Please fill in your name and email.');
+        return;
+      }
+      this.contactSent = true;
+    },
+
+    submitBooking() {
+      if (!this.booking.name || !this.booking.email || !this.booking.date || !this.booking.time) {
+        alert('Please complete all fields and select a time slot.');
+        return;
+      }
+      this.bookingSent = true;
+    },
+  },
+});
+</script>
+</body>
+</html>
